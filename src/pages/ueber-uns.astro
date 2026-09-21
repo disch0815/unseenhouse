@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site';
+---
+
+<BaseLayout title="Über uns">
+  <div class="prose">
+    <h1>Über {SITE.name}</h1>
+    <p>
+      Radioaktivität ist überall — im Boden unter dem Haus, in der Nussschale,
+      in elf Kilometern Flughöhe. Und fast überall wird sie entweder ignoriert
+      oder dramatisiert. {SITE.name} will beides nicht: Wir erklären
+      verständlich und mit Zahlen aus amtlichen Quellen (BAG, BfS, WHO, EPA),
+      wo uns Strahlung, Schadstoffe und belastetes Wasser im Alltag begegnen —
+      und wann sie tatsächlich ein Problem sind.
+    </p>
+    <p>
+      Die Inhalte entstehen im Umfeld der Strahlenschutz-Fortbildungen von
+      PD Dr. Dirk Schulze. Fachpersonen, die eine anerkannte Fortbildung im
+      Strahlenschutz suchen, finden diese auf
+      <a href={SITE.kurseUrl} rel="noopener">kurse.dirkschulze.ch</a> — dort
+      gibt es auch den kostenlosen
+      <a href={`${SITE.kurseUrl}/flugdosis/`} rel="noopener">Flugdosis-Rechner</a>
+      und den
+      <a href={`${SITE.kurseUrl}/dosisrechner/`} rel="noopener">Dosis-Rechner</a>.
+    </p>
+    <p>
+      Diese Webseite finanziert sich über Werbung und gekennzeichnete
+      Affiliate-Links. Die Inhalte ersetzen keine individuelle medizinische
+      Beratung.
+    </p>
+  </div>
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../site';
+import { LOCALES } from '../../i18n';
+
+const t = LOCALES.it;
+---
+
+<BaseLayout title="Pubblicità" lang="it">
+  <div class="prose">
+    <h1>Fare pubblicità su {t.siteName}</h1>
+    <p>
+      Su {t.siteName} raggiungi un pubblico che si informa attivamente sui
+      nostri temi. Oltre alla pubblicità automatizzata offriamo spazi
+      pubblicitari a prenotazione fissa e articoli in collaborazione
+      chiaramente contrassegnati.
+    </p>
+    <ul>
+      <li>Banner sulla pagina iniziale e sulle pagine tematiche</li>
+      <li>Articoli sponsorizzati, chiaramente contrassegnati</li>
+      <li>Menzione nella nostra sezione risorse</li>
+    </ul>
+    <p>
+      Interessati? Scrivete a
+      <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a> — vi
+      invieremo volentieri dati aggiornati su visite e prezzi.
+    </p>
+  </div>
+</BaseLayout>

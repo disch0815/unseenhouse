@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import { LOCALES } from '../../../i18n';
+import { getCollection } from 'astro:content';
+import { alternatesFor } from '../../../translations';
+
+const lang = 'en';
+
+export async function getStaticPaths() {
+  const themen = (await getCollection('themen')).filter((th) =>
+    th.id.startsWith('en/')
+  );
+  return themen.map((thema) => ({
+    params: { id: thema.id.split('/')[1] },
+    props: { thema },
+  }));
+}
+
+const { thema } = Astro.props;
+const themaSlug = thema.id.split('/')[1];
+const t = LOCALES[lang];
+const artikel = (
+  await getCollection(
+    'artikel',
+    ({ id, data }) =>
+      !data.draft && id.startsWith(`${lang}/`) && data.thema === themaSlug
+  )
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title={thema.data.title} description={thema.data.description} lang={lang} alternates={alternatesFor('thema', lang, themaSlug)}>
+  <h1>{thema.data.title}</h1>
+  <p class="intro">{thema.data.description}</p>
+
+  <AdSlot slot="" label={t.adLabel} />
+
+  <div class="grid">
+    {artikel.map((a) => <ArticleCard artikel={a} lang={lang} />)}
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-top: 40px;
+  }
+
+  .intro {
+    color: var(--text-muted);
+    max-width: 46rem;
+    margin-top: -8px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+</style>

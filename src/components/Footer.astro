@@ -1,0 +1,50 @@
+---
+import { LOCALES, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'de' } = Astro.props;
+const t = LOCALES[lang];
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container inner">
+    <p>© {year} {t.siteName}</p>
+    <nav aria-label="Rechtliches">
+      <a href={t.footer.impressumHref}>{t.footer.impressum}</a>
+      <a href={t.footer.datenschutzHref}>{t.footer.datenschutz}</a>
+      <a href={t.footer.werbungHref}>{t.footer.werbung}</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  footer {
+    margin-top: 64px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-block: 20px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+  }
+
+  nav a {
+    color: var(--text-muted);
+  }
+</style>

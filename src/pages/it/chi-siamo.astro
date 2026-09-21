@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../site';
+import { LOCALES } from '../../i18n';
+
+const t = LOCALES.it;
+---
+
+<BaseLayout title="Chi siamo" lang="it">
+  <div class="prose">
+    <h1>Chi siamo</h1>
+    <p>
+      La radioattività è ovunque — nel terreno sotto casa, nel guscio di una
+      noce, a undici chilometri di quota. E quasi ovunque viene ignorata oppure
+      drammatizzata. {t.siteName} non vuole fare né l'una né l'altra cosa:
+      spieghiamo in modo comprensibile, con numeri tratti da fonti ufficiali
+      (UFSP, BfS, ISS, OMS), dove incontriamo radiazioni, sostanze nocive e
+      acqua contaminata nella vita quotidiana — e quando sono davvero un
+      problema.
+    </p>
+    <p>
+      I contenuti nascono nell'ambito dei corsi di radioprotezione del
+      PD Dr. Dirk Schulze. I professionisti che cercano una formazione
+      riconosciuta in radioprotezione la trovano su
+      <a href={SITE.kurseUrl} rel="noopener">kurse.dirkschulze.ch</a> — dove
+      sono disponibili anche il
+      <a href={`${SITE.kurseUrl}/flugdosis/`} rel="noopener">calcolatore della dose di volo</a>
+      e il
+      <a href={`${SITE.kurseUrl}/dosisrechner/`} rel="noopener">calcolatore di dose</a>,
+      entrambi gratuiti.
+    </p>
+    <p>
+      Questo sito si finanzia con la pubblicità e con link di affiliazione
+      contrassegnati. I contenuti non sostituiscono una consulenza medica
+      individuale.
+    </p>
+  </div>
+</BaseLayout>

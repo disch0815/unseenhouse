@@ -1,0 +1,129 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { LOCALES, type Lang } from '../i18n';
+
+interface Props {
+  thema: CollectionEntry<'themen'>;
+  artikel: CollectionEntry<'artikel'>[];
+  lang?: Lang;
+}
+
+const { thema, artikel, lang = 'de' } = Astro.props;
+const t = LOCALES[lang];
+const slug = thema.id.split('/')[1];
+const href = `${t.themenBase}/${slug}`;
+
+// Dezente Platzhalter-Fläche, solange kein Foto hinterlegt ist
+const tones = ['tone-a', 'tone-b', 'tone-c', 'tone-d'];
+const tone = tones[Math.abs([...slug].reduce((a, c) => a + c.charCodeAt(0), 0)) % tones.length];
+---
+
+<article class="topic-card">
+  <a class="media" href={href} aria-hidden="true" tabindex="-1">
+    {
+      thema.data.image ? (
+        <img src={thema.data.image} alt="" loading="lazy" />
+      ) : (
+        <div class:list={['placeholder', tone]} />
+      )
+    }
+  </a>
+  <div class="body">
+    <h3><a href={href}>{thema.data.title}</a></h3>
+    <p>{thema.data.description}</p>
+    <ul>
+      {
+        artikel.slice(0, 3).map((a) => (
+          <li>
+            <a href={`${t.artikelBase}/${a.id.split('/')[1]}`}>{a.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>
+
+<style>
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .media {
+    display: block;
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .media img,
+  .placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .tone-a { background: linear-gradient(135deg, #1a7f6b22, #1a7f6b55); }
+  .tone-b { background: linear-gradient(135deg, #4a6c8c22, #4a6c8c55); }
+  .tone-c { background: linear-gradient(135deg, #8c6d4a22, #8c6d4a55); }
+  .tone-d { background: linear-gradient(135deg, #6b4a8c22, #6b4a8c55); }
+
+  .body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+
+  h3 a {
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  h3 a:hover {
+    color: var(--accent);
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  li a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  li a:hover {
+    color: var(--accent);
+  }
+
+  li a::before {
+    content: '→ ';
+    color: var(--accent);
+  }
+</style>

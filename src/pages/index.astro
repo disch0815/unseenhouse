@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
+import TopicCard from '../components/TopicCard.astro';
+import { LOCALES } from '../i18n';
+import { SISTER } from '../sister';
+import { getCollection } from 'astro:content';
+import { homeAlternates } from '../translations';
+
+const lang = 'de';
+const t = LOCALES[lang];
+const sister = SISTER[lang];
+
+const themen = (await getCollection('themen'))
+  .filter((th) => th.id.startsWith(`${lang}/`))
+  .sort((a, b) => a.data.order - b.data.order);
+const alleArtikel = (
+  await getCollection('artikel', ({ id, data }) => !data.draft && id.startsWith(`${lang}/`))
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const artikelZu = (slug: string) => alleArtikel.filter((a) => a.data.thema === slug);
+---
+
+<BaseLayout title={t.tagline} lang={lang} alternates={homeAlternates()}>
+  <section class="hero">
+    <p class="eyebrow">{t.tagline}</p>
+    <h1>{t.sections.haus.title}</h1>
+    <p class="sub">{t.sections.haus.intro}</p>
+  </section>
+
+  <div class="topic-grid">
+    {
+      themen.map((thema) => (
+        <TopicCard thema={thema} artikel={artikelZu(thema.id.split('/')[1])} lang={lang} />
+      ))
+    }
+  </div>
+
+  <AdSlot slot="" label={t.adLabel} />
+
+  <section class="sister-band">
+    <div class="band-text">
+      <p class="eyebrow">{sister.label}</p>
+      <h2>{sister.title}</h2>
+      <p class="sub">{sister.intro}</p>
+      <a class="btn" href={sister.url} rel="noopener">{sister.cta} →</a>
+    </div>
+    <ul class="band-topics">
+      {
+        sister.topics.map((topic) => (
+          <li>
+            <a href={topic.href} rel="noopener">{topic.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: 48px 32px;
+    max-width: 44rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .hero h1 {
+    margin: 0 0 12px;
+    font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+    line-height: 1.15;
+  }
+
+  .sub {
+    color: var(--text-muted);
+    font-size: 1.08rem;
+    margin: 0;
+  }
+
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .sister-band {
+    margin-block: 48px 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 48px;
+    align-items: center;
+  }
+
+  .band-text {
+    flex: 2 1 340px;
+  }
+
+  .band-text h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+  }
+
+  .band-text .sub {
+    margin-bottom: 18px;
+  }
+
+  .band-topics {
+    flex: 1 1 220px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .band-topics a {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--bg);
+  }
+
+  .band-topics a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+</style>

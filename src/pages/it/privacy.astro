@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../site';
+---
+
+<BaseLayout title="Informativa sulla privacy" lang="it">
+  <div class="prose">
+    <h1>Informativa sulla privacy</h1>
+    <p>
+      Responsabile del trattamento dei dati su questo sito è
+      {SITE.owner.name} (contatti nelle <a href="/it/note-legali">note legali</a>).
+      La presente informativa illustra il trattamento dei dati personali ai
+      sensi della legge svizzera sulla protezione dei dati (nLPD) e, ove
+      applicabile, del Regolamento generale sulla protezione dei dati dell'UE
+      (GDPR).
+    </p>
+
+    <h2>Hosting e log del server</h2>
+    <p>
+      All'apertura di questo sito il provider di hosting tratta i dati
+      tecnicamente necessari (indirizzo IP, data e ora, pagina richiesta, tipo
+      di browser) per fornire il sito e garantirne la sicurezza.
+      <!-- TODO: indicare il provider di hosting, ad es. Cloudflare Pages -->
+    </p>
+
+    <h2>Pubblicità (Google AdSense)</h2>
+    <p>
+      Questo sito utilizza Google AdSense, un servizio di Google Ireland
+      Limited, per la visualizzazione di annunci pubblicitari. AdSense impiega
+      cookie e tecnologie analoghe per erogare gli annunci e misurarne
+      l'efficacia; in tale ambito i dati possono essere trasmessi a Google.
+      La pubblicità personalizzata viene mostrata solo previo consenso, che può
+      essere revocato in qualsiasi momento tramite le impostazioni dei cookie.
+      Maggiori informazioni:
+      <a href="https://policies.google.com/technologies/ads" rel="noopener">
+        norme pubblicitarie di Google</a>.
+    </p>
+
+    <h2>Link di affiliazione</h2>
+    <p>
+      Alcuni articoli contengono link di raccomandazione contrassegnati come
+      «Annuncio». Cliccando su uno di questi link, il partner interessato
+      imposta un cookie per attribuire la segnalazione. In caso di acquisto
+      riceviamo una commissione — senza costi aggiuntivi per l'utente.
+    </p>
+
+    <h2>I vostri diritti</h2>
+    <p>
+      Avete il diritto di ottenere informazioni sui vostri dati personali,
+      di farli rettificare o cancellare e di opporvi al loro trattamento.
+      A tal fine rivolgetevi al contatto indicato nelle note legali.
+    </p>
+  </div>
+</BaseLayout>

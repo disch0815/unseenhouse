@@ -1,0 +1,131 @@
+---
+/**
+ * Einfacher Cookie-/Werbe-Consent. Lädt das AdSense-Skript erst nach
+ * Zustimmung. Hinweis: Für den Produktivbetrieb mit AdSense in der
+ * EU/Schweiz verlangt Google eine zertifizierte Consent-Plattform (CMP),
+ * am einfachsten Googles eigene "Privacy & messaging" im AdSense-Konto —
+ * dann kann dieser Banner entfernt werden.
+ */
+import { SITE } from '../site';
+import { LOCALES, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'de' } = Astro.props;
+const t = LOCALES[lang];
+const publisherId = SITE.adsensePublisherId;
+
+const texts = {
+  de: {
+    info: 'Wir nutzen Werbung (Google AdSense), um diese Seite kostenlos anbieten zu können. Dafür werden Cookies verwendet. Details in der',
+    linkLabel: 'Datenschutzerklärung',
+    accept: 'Einverstanden',
+    decline: 'Nur notwendige',
+  },
+  it: {
+    info: 'Utilizziamo la pubblicità (Google AdSense) per offrire questo sito gratuitamente. A tal fine vengono usati dei cookie. Dettagli nell’',
+    linkLabel: 'informativa sulla privacy',
+    accept: 'Accetto',
+    decline: 'Solo necessari',
+  },
+  en: {
+    info: 'We use advertising (Google AdSense) to keep this site free. This involves cookies. Details in our',
+    linkLabel: 'privacy policy',
+    accept: 'Accept',
+    decline: 'Essential only',
+  },
+}[lang];
+---
+
+{
+  publisherId !== '' && (
+    <div class="consent" id="consent-banner" hidden>
+      <p>
+        {texts.info} <a href={t.footer.datenschutzHref}>{texts.linkLabel}</a>.
+      </p>
+      <div class="actions">
+        <button id="consent-accept" class="btn">{texts.accept}</button>
+        <button id="consent-decline">{texts.decline}</button>
+      </div>
+    </div>
+  )
+}
+
+<script is:inline define:vars={{ publisherId }}>
+  if (publisherId) {
+    const KEY = 'ad-consent';
+    const banner = document.getElementById('consent-banner');
+
+    const loadAds = () => {
+      const s = document.createElement('script');
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      s.src =
+        'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' +
+        publisherId;
+      document.head.appendChild(s);
+    };
+
+    let stored = null;
+    try {
+      stored = localStorage.getItem(KEY);
+    } catch {}
+
+    if (stored === 'yes') {
+      loadAds();
+    } else if (stored === null && banner) {
+      banner.hidden = false;
+      document.getElementById('consent-accept')?.addEventListener('click', () => {
+        try {
+          localStorage.setItem(KEY, 'yes');
+        } catch {}
+        banner.hidden = true;
+        loadAds();
+      });
+      document.getElementById('consent-decline')?.addEventListener('click', () => {
+        try {
+          localStorage.setItem(KEY, 'no');
+        } catch {}
+        banner.hidden = true;
+      });
+    }
+  }
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    inset-inline: 16px;
+    bottom: 16px;
+    max-width: 640px;
+    margin-inline: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 0.15);
+    z-index: 100;
+    font-size: 0.92rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .actions button {
+    cursor: pointer;
+    font: inherit;
+  }
+
+  #consent-decline {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: var(--text-muted);
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../site';
+import { LOCALES } from '../../i18n';
+
+const t = LOCALES.en;
+---
+
+<BaseLayout title="About" lang="en">
+  <div class="prose">
+    <h1>About {t.siteName}</h1>
+    <p>
+      Radioactivity is everywhere — in the ground under your house, inside a
+      nutshell, at 36,000 feet. And almost everywhere it is either ignored or
+      dramatized. {t.siteName} does neither: we explain in plain language,
+      with numbers from official sources (EPA, CDC, WHO, and European
+      authorities), where radiation and other invisible risks show up in
+      everyday life — and when they actually matter.
+    </p>
+    <p>
+      The content is created in the orbit of the radiation protection courses
+      of PD Dr. Dirk Schulze. Professionals looking for accredited radiation
+      protection training will find it at
+      <a href={SITE.kurseUrl} rel="noopener">kurse.dirkschulze.ch</a> — home of
+      the free
+      <a href={`${SITE.kurseUrl}/flugdosis/`} rel="noopener">flight dose calculator</a>
+      and the
+      <a href={`${SITE.kurseUrl}/dosisrechner/`} rel="noopener">dose calculator</a>.
+    </p>
+    <p>
+      This site is funded by advertising and clearly labeled affiliate links.
+      Its content is general information and no substitute for individual
+      medical advice.
+    </p>
+  </div>
+</BaseLayout>

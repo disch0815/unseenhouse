@@ -1,0 +1,56 @@
+---
+/**
+ * Empfehlungsbox für Affiliate-Links. Kennzeichnung als Werbung ist in
+ * DE/CH Pflicht — der Hinweis wird darum immer mitgerendert.
+ */
+import { SITE } from '../site';
+import { LOCALES, type Lang } from '../i18n';
+
+interface Props {
+  title: string;
+  href: string;
+  cta?: string;
+  lang?: Lang;
+}
+
+const { title, href: rawHref, cta = 'Zum Angebot', lang = 'de' } = Astro.props;
+const tagLabel = LOCALES[lang].affiliateTag;
+
+// Amazon-Partner-Tag aus site.ts automatisch anhängen
+let href = rawHref;
+if (SITE.amazonPartnerTag && /amazon\./.test(rawHref) && !rawHref.includes('tag=')) {
+  href = rawHref + (rawHref.includes('?') ? '&' : '?') + 'tag=' + SITE.amazonPartnerTag;
+}
+---
+
+<aside class="affiliate card">
+  <span class="tag">{tagLabel}</span>
+  <strong>{title}</strong>
+  <div class="body"><slot /></div>
+  <a class="btn" href={href} rel="sponsored nofollow noopener" target="_blank">{cta} →</a>
+</aside>
+
+<style>
+  .affiliate {
+    margin-block: 28px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .tag {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  strong {
+    font-size: 1.05rem;
+  }
+
+  .body {
+    margin-block: 8px 14px;
+    color: var(--text-muted);
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+/**
+ * Werbeplatz. Rendert einen AdSense-Block, sobald in src/site.ts die
+ * Publisher-ID eingetragen ist; vorher einen dezenten Platzhalter, damit
+ * das Layout schon mit Werbeflächen getestet werden kann.
+ *
+ * `slot` ist die Anzeigenblock-ID aus dem AdSense-Dashboard (pro Platzierung
+ * einen eigenen Anzeigenblock anlegen: z. B. "header", "in-article", "sidebar").
+ */
+import { SITE } from '../site';
+
+interface Props {
+  slot?: string;
+  format?: string;
+  label?: string;
+}
+
+const { slot = '', format = 'auto', label = 'Anzeige' } = Astro.props;
+const active = SITE.adsensePublisherId !== '' && slot !== '';
+---
+
+<div class="ad-slot" aria-label={label}>
+  <span class="ad-hint">{label}</span>
+  {
+    active ? (
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client={SITE.adsensePublisherId}
+        data-ad-slot={slot}
+        data-ad-format={format}
+        data-full-width-responsive="true"
+      />
+    ) : (
+      <div class="ad-placeholder">Werbefläche</div>
+    )
+  }
+</div>
+
+{active && <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>}
+
+<style>
+  .ad-slot {
+    margin-block: 28px;
+  }
+
+  .ad-hint {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .ad-placeholder {
+    background: var(--ad-bg);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+</style>

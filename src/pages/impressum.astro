@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site';
+---
+
+<BaseLayout title="Impressum">
+  <div class="prose">
+    <h1>Impressum</h1>
+    <p>
+      {SITE.owner.name}<br />
+      {SITE.owner.street}<br />
+      {SITE.owner.city}<br />
+      {SITE.owner.country}
+    </p>
+    <p>E-Mail: <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a></p>
+    <h2>Haftungsausschluss</h2>
+    <p>
+      Die Inhalte dieser Webseite wurden mit grösstmöglicher Sorgfalt erstellt.
+      Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird
+      jedoch keine Gewähr übernommen. Beiträge geben allgemeine Informationen
+      wieder und ersetzen keine individuelle Beratung.
+    </p>
+    <h2>Werbung und Affiliate-Links</h2>
+    <p>
+      Diese Webseite finanziert sich über Werbung und Empfehlungslinks
+      (Affiliate-Links). Entsprechende Inhalte sind als «Anzeige»
+      gekennzeichnet.
+    </p>
+  </div>
+</BaseLayout>

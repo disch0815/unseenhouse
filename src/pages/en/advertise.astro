@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../site';
+import { LOCALES } from '../../i18n';
+
+const t = LOCALES.en;
+---
+
+<BaseLayout title="Advertise" lang="en">
+  <div class="prose">
+    <h1>Advertise on {t.siteName}</h1>
+    <p>
+      {t.siteName} reaches an audience that actively researches our topics.
+      Beyond programmatic advertising, we offer fixed ad placements and
+      clearly labeled sponsored articles.
+    </p>
+    <ul>
+      <li>Banner placements on the home and topic pages</li>
+      <li>Sponsored articles, clearly labeled</li>
+      <li>A mention in our resources section</li>
+    </ul>
+    <p>
+      Interested? Write to
+      <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a> — we will
+      gladly send you current traffic figures and rates.
+    </p>
+  </div>
+</BaseLayout>

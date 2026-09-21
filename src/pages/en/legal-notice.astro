@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../site';
+---
+
+<BaseLayout title="Legal notice" lang="en">
+  <div class="prose">
+    <h1>Legal notice</h1>
+    <p>
+      {SITE.owner.name}<br />
+      {SITE.owner.street}<br />
+      {SITE.owner.city}<br />
+      Switzerland
+    </p>
+    <p>Email: <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a></p>
+    <h2>Disclaimer</h2>
+    <p>
+      The content of this website has been prepared with the greatest possible
+      care. However, no guarantee is given for its accuracy, completeness, or
+      timeliness. Articles provide general information and are no substitute
+      for individual advice.
+    </p>
+    <h2>Advertising and affiliate links</h2>
+    <p>
+      This website is funded through advertising and recommendation links
+      (affiliate links). Such content is labeled as an ad.
+    </p>
+  </div>
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site';
+---
+
+<BaseLayout title="Datenschutzerklärung">
+  <div class="prose">
+    <h1>Datenschutzerklärung</h1>
+    <p>
+      Verantwortlich für die Datenbearbeitung auf dieser Webseite ist
+      {SITE.owner.name} (Kontakt siehe <a href="/impressum">Impressum</a>).
+      Diese Erklärung informiert gemäss dem schweizerischen Datenschutzgesetz
+      (revDSG) und, soweit anwendbar, der EU-Datenschutz-Grundverordnung
+      (DSGVO) über die Bearbeitung von Personendaten.
+    </p>
+
+    <h2>Hosting und Server-Logs</h2>
+    <p>
+      Beim Aufruf dieser Webseite verarbeitet der Hosting-Anbieter technisch
+      notwendige Daten (IP-Adresse, Datum und Uhrzeit, aufgerufene Seite,
+      Browsertyp), um die Seite auszuliefern und die Sicherheit zu
+      gewährleisten. <!-- TODO: Hosting-Anbieter eintragen, z. B. Cloudflare Pages -->
+    </p>
+
+    <h2>Werbung (Google AdSense)</h2>
+    <p>
+      Diese Webseite nutzt Google AdSense, einen Dienst der Google Ireland
+      Limited, zur Einblendung von Werbeanzeigen. AdSense verwendet Cookies
+      und vergleichbare Technologien, um Anzeigen auszuspielen und deren
+      Wirksamkeit zu messen. Dabei können Daten an Google übermittelt werden.
+      Personalisierte Werbung wird nur nach Ihrer Einwilligung ausgespielt;
+      Sie können Ihre Auswahl jederzeit über die Cookie-Einstellungen
+      widerrufen. Weitere Informationen:
+      <a href="https://policies.google.com/technologies/ads" rel="noopener">
+        Google-Werberichtlinien</a>.
+    </p>
+
+    <h2>Affiliate-Links</h2>
+    <p>
+      Einzelne Beiträge enthalten als «Anzeige» gekennzeichnete
+      Empfehlungslinks. Beim Klick auf einen solchen Link setzt der jeweilige
+      Partner ein Cookie, um die Vermittlung zuzuordnen. Erfolgt darüber ein
+      Kauf, erhalten wir eine Provision — für Sie entstehen keine Mehrkosten.
+    </p>
+
+    <h2>Ihre Rechte</h2>
+    <p>
+      Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer
+      Personendaten sowie auf Widerspruch gegen deren Bearbeitung. Wenden Sie
+      sich dazu an die im Impressum genannte Kontaktadresse.
+    </p>
+  </div>
+</BaseLayout>

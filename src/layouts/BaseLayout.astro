@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import { LOCALES, type Lang } from '../i18n';
+import type { Alternate } from '../translations';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: Lang;
+  alternates?: Alternate[];
+}
+
+const { title, lang = 'de', alternates = [] } = Astro.props;
+const t = LOCALES[lang];
+const description = Astro.props.description ?? t.description;
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{`${title} – ${t.siteName}`}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&display=swap"
+    />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {
+      alternates.map((a) => (
+        <link
+          rel="alternate"
+          hreflang={a.lang}
+          href={new URL(a.href, Astro.site)}
+        />
+      ))
+    }
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <Header lang={lang} />
+    <main class="container">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <ConsentBanner lang={lang} />
+  </body>
+</html>

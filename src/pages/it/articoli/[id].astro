@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import AffiliateBox from '../../../components/AffiliateBox.astro';
+import { LOCALES } from '../../../i18n';
+import { getCollection, getEntry, render } from 'astro:content';
+import { alternatesFor } from '../../../translations';
+
+const lang = 'it';
+
+export async function getStaticPaths() {
+  const artikel = await getCollection(
+    'artikel',
+    ({ id, data }) => !data.draft && id.startsWith('it/')
+  );
+  return artikel.map((a) => ({
+    params: { id: a.id.split('/')[1] },
+    props: { artikel: a },
+  }));
+}
+
+const { artikel } = Astro.props;
+const t = LOCALES[lang];
+const { Content } = await render(artikel);
+const thema = await getEntry('themen', `${lang}/${artikel.data.thema}`);
+
+const datum = artikel.data.updatedDate ?? artikel.data.pubDate;
+const datumFormatiert = datum.toLocaleDateString(t.dateLocale, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={artikel.data.title} description={artikel.data.description} lang={lang} alternates={alternatesFor('artikel', lang, artikel.id.split('/')[1])}>
+  <article class="prose">
+    <nav class="breadcrumb" aria-label="Pfad">
+      <a href={t.base || '/'}>{t.breadcrumbHome}</a>
+      {thema && (
+        <>
+          <span>›</span>
+          <a href={`${t.themenBase}/${thema.id.split('/')[1]}`}>{thema.data.title}</a>
+        </>
+      )}
+    </nav>
+    <h1>{artikel.data.title}</h1>
+    <p class="meta">
+      {artikel.data.updatedDate ? t.updatedOn : t.publishedOn}
+      {' '}{datumFormatiert}
+    </p>
+
+    {
+      artikel.data.image && (
+        <figure class="hero-img">
+          <img src={artikel.data.image} alt="" />
+          {artikel.data.imageCredit && (
+            <figcaption>
+              {artikel.data.imageCreditUrl ? (
+                <a href={artikel.data.imageCreditUrl} rel="noopener nofollow">
+                  {artikel.data.imageCredit}
+                </a>
+              ) : (
+                artikel.data.imageCredit
+              )}
+            </figcaption>
+          )}
+        </figure>
+      )
+    }
+
+    <AdSlot slot="" label={t.adLabel} />
+
+    <Content />
+
+    {
+      artikel.data.affiliate && (
+        <AffiliateBox
+          title={artikel.data.affiliate.title}
+          href={artikel.data.affiliate.href}
+          cta={artikel.data.affiliate.cta}
+          lang={lang}
+        >
+          {artikel.data.affiliate.text}
+        </AffiliateBox>
+      )
+    }
+
+    <AdSlot slot="" label={t.adLabel} />
+  </article>
+</BaseLayout>
+
+<style>
+  .breadcrumb {
+    margin-top: 32px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 8px;
+  }
+
+  h1 {
+    line-height: 1.25;
+    margin-block: 12px 4px;
+  }
+
+  .meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0;
+  }
+
+  .hero-img {
+    margin: 20px 0 0;
+  }
+
+  .hero-img img {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .hero-img figcaption,
+  .hero-img figcaption a {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+</style>

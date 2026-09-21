@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site';
+---
+
+<BaseLayout title="Werben Sie hier">
+  <div class="prose">
+    <h1>Werben auf {SITE.name}</h1>
+    <!-- Mediadaten-Seite für die Direktvermarktung von Werbeplätzen -->
+    <p>
+      Sie erreichen auf {SITE.name} ein Publikum, das sich aktiv über unsere
+      Themen informiert. Neben automatisierter Werbung bieten wir auch fest
+      gebuchte Werbeplätze und gekennzeichnete Kooperations-Beiträge an.
+    </p>
+    <ul>
+      <li>Banner-Platzierungen auf Start- und Themenseiten</li>
+      <li>Gesponserte, klar gekennzeichnete Fachbeiträge</li>
+      <li>Nennung in unserem Ressourcen-Bereich</li>
+    </ul>
+    <p>
+      Interessiert? Schreiben Sie an
+      <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a> — wir
+      senden Ihnen gern aktuelle Reichweiten und Preise.
+    </p>
+  </div>
+</BaseLayout>
