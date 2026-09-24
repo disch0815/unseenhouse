@@ -11,7 +11,7 @@ export const SITE = {
   // programma-affiliazione.amazon.it, affiliate-program.amazon.com).
   // Leere Tags => Link ohne Tag. Wird von AffiliateBox automatisch angehängt.
   amazonPartnerTags: {
-    'amazon.de': '',
+    'amazon.de': 'unseenhouse-21',
     'amazon.it': '',
     'amazon.com': '',
   } as Record<string, string>,
