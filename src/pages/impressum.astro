@@ -12,7 +12,14 @@ import { SITE } from '../site';
       {SITE.owner.city}<br />
       {SITE.owner.country}
     </p>
-    <p>E-Mail: <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a></p>
+    <p>
+      E-Mail: <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a><br />
+      Telefon: {SITE.owner.phone}
+    </p>
+    <p>
+      Geschäftsführung: {SITE.owner.management}<br />
+      UID: {SITE.owner.uid}
+    </p>
     <h2>Haftungsausschluss</h2>
     <p>
       Die Inhalte dieser Webseite wurden mit grösstmöglicher Sorgfalt erstellt.

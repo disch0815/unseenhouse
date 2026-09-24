@@ -16,12 +16,15 @@ export const SITE = {
     'amazon.com': '',
   } as Record<string, string>,
   kurseUrl: 'https://kurse.dirkschulze.ch',
-  // Impressum-Angaben (Pflicht in DE/CH bei kommerziellen Seiten mit Werbung)
+  // Impressums-Angaben (Quelle: www.dirkschulze.ch/impressum)
   owner: {
-    name: 'PD Dr. Dirk Schulze', // TODO prüfen/vervollständigen
-    street: 'Strasse Nr.', // TODO
-    city: 'PLZ Ort', // TODO
+    name: 'Dirk Schulze Röntgendiagnostik GmbH',
+    street: 'Schlatterpünt 2',
+    city: '8460 Marthalen',
     country: 'Schweiz',
-    email: 'kontakt@example.com', // TODO
+    email: 'ds@dirkschulze.ch',
+    phone: '+41 52 589 68 59',
+    uid: 'CHE-258.518.798',
+    management: 'PD Dr. med. dent. Dirk Schulze (Vorsitzender), Nadine Sandra Schulze (Geschäftsführerin)',
   },
 };

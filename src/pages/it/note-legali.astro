@@ -12,7 +12,14 @@ import { SITE } from '../../site';
       {SITE.owner.city}<br />
       Svizzera
     </p>
-    <p>E-mail: <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a></p>
+    <p>
+      E-mail: <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a><br />
+      Telefono: {SITE.owner.phone}
+    </p>
+    <p>
+      Direzione: {SITE.owner.management}<br />
+      IDI: {SITE.owner.uid}
+    </p>
     <h2>Esclusione di responsabilità</h2>
     <p>
       I contenuti di questo sito sono stati redatti con la massima cura.

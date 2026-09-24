@@ -12,7 +12,14 @@ import { SITE } from '../../site';
       {SITE.owner.city}<br />
       Switzerland
     </p>
-    <p>Email: <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a></p>
+    <p>
+      Email: <a href={`mailto:${SITE.owner.email}`}>{SITE.owner.email}</a><br />
+      Phone: {SITE.owner.phone}
+    </p>
+    <p>
+      Management: {SITE.owner.management}<br />
+      Swiss UID: {SITE.owner.uid}
+    </p>
     <h2>Disclaimer</h2>
     <p>
       The content of this website has been prepared with the greatest possible
