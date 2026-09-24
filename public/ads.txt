@@ -1,0 +1,2 @@
+# Wird nach der AdSense-Anmeldung befuellt (Publisher-ID einsetzen):
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

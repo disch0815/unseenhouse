@@ -16,10 +16,14 @@ interface Props {
 const { title, href: rawHref, cta = 'Zum Angebot', lang = 'de' } = Astro.props;
 const tagLabel = LOCALES[lang].affiliateTag;
 
-// Amazon-Partner-Tag aus site.ts automatisch anhängen
+// Passenden Amazon-Partner-Tag (pro Marktplatz) aus site.ts anhängen
 let href = rawHref;
-if (SITE.amazonPartnerTag && /amazon\./.test(rawHref) && !rawHref.includes('tag=')) {
-  href = rawHref + (rawHref.includes('?') ? '&' : '?') + 'tag=' + SITE.amazonPartnerTag;
+const marketplace = Object.keys(SITE.amazonPartnerTags).find((m) =>
+  rawHref.includes(`//www.${m}/`)
+);
+const tag = marketplace ? SITE.amazonPartnerTags[marketplace] : '';
+if (tag && !rawHref.includes('tag=')) {
+  href = rawHref + (rawHref.includes('?') ? '&' : '?') + 'tag=' + tag;
 }
 ---
 

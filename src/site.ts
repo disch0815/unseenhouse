@@ -7,9 +7,14 @@ export const SITE = {
   // AdSense: Nach Freischaltung des AdSense-Kontos hier die Publisher-ID eintragen,
   // z. B. 'ca-pub-1234567890123456'. Solange leer, werden nur Platzhalter gerendert.
   adsensePublisherId: '',
-  // Affiliate: Amazon-Partner-Tag (https://partnernet.amazon.de) — wird an
-  // Amazon-Links angehängt. Solange leer, zeigen die Boxen den Link ohne Tag.
-  amazonPartnerTag: '',
+  // Affiliate: Amazon-Partner-Tags pro Marktplatz (partnernet.amazon.de,
+  // programma-affiliazione.amazon.it, affiliate-program.amazon.com).
+  // Leere Tags => Link ohne Tag. Wird von AffiliateBox automatisch angehängt.
+  amazonPartnerTags: {
+    'amazon.de': '',
+    'amazon.it': '',
+    'amazon.com': '',
+  } as Record<string, string>,
   kurseUrl: 'https://kurse.dirkschulze.ch',
   // Impressum-Angaben (Pflicht in DE/CH bei kommerziellen Seiten mit Werbung)
   owner: {
