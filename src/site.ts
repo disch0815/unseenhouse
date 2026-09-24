@@ -6,7 +6,7 @@ export const SITE = {
     'Radon im Keller, Asbest in der Wand, Blei im Wasser: die unsichtbaren Risiken des Alltags — verständlich erklärt, mit Zahlen statt Panik.',
   // AdSense: Nach Freischaltung des AdSense-Kontos hier die Publisher-ID eintragen,
   // z. B. 'ca-pub-1234567890123456'. Solange leer, werden nur Platzhalter gerendert.
-  adsensePublisherId: '',
+  adsensePublisherId: 'ca-pub-1767160731181931',
   // Affiliate: Amazon-Partner-Tags pro Marktplatz (partnernet.amazon.de,
   // programma-affiliazione.amazon.it, affiliate-program.amazon.com).
   // Leere Tags => Link ohne Tag. Wird von AffiliateBox automatisch angehängt.

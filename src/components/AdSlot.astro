@@ -17,25 +17,29 @@ interface Props {
 
 const { slot = '', format = 'auto', label = 'Anzeige' } = Astro.props;
 const active = SITE.adsensePublisherId !== '' && slot !== '';
+// Ohne Slot-ID, aber mit Publisher-ID: ganz ausblenden (Auto Ads übernehmen)
+const showPlaceholder = SITE.adsensePublisherId === '';
 ---
 
-<div class="ad-slot" aria-label={label}>
-  <span class="ad-hint">{label}</span>
-  {
-    active ? (
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-client={SITE.adsensePublisherId}
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive="true"
-      />
-    ) : (
-      <div class="ad-placeholder">Werbefläche</div>
-    )
-  }
-</div>
+{
+  (active || showPlaceholder) && (
+    <div class="ad-slot" aria-label={label}>
+      <span class="ad-hint">{label}</span>
+      {active ? (
+        <ins
+          class="adsbygoogle"
+          style="display:block"
+          data-ad-client={SITE.adsensePublisherId}
+          data-ad-slot={slot}
+          data-ad-format={format}
+          data-full-width-responsive="true"
+        />
+      ) : (
+        <div class="ad-placeholder">Werbefläche</div>
+      )}
+    </div>
+  )
+}
 
 {active && <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>}
 
