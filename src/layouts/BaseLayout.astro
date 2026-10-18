@@ -16,6 +16,13 @@ interface Props {
 const { title, lang = 'de', alternates = [] } = Astro.props;
 const t = LOCALES[lang];
 const description = Astro.props.description ?? t.description;
+// Bei build.format 'file' enthält Astro.url.pathname die .html-Dateipfade;
+// kanonisch sind aber die URLs ohne Endung. Sprach-Startseiten liegen als
+// it/index.html bzw. en/index.html auf dem Server, dort gilt die Slash-URL.
+const canonicalPath = Astro.url.pathname
+  .replace(/\/index\.html$/, '/')
+  .replace(/\.html$/, '')
+  .replace(/^\/(it|en)$/, '/$1/');
 ---
 
 <html lang={lang}>
@@ -65,7 +72,7 @@ const description = Astro.props.description ?? t.description;
         </script>
       )
     }
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={new URL(canonicalPath, Astro.site)} />
     {
       alternates.map((a) => (
         <link

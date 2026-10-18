@@ -79,12 +79,12 @@ export const LOCALES: Record<Lang, Locale> = {
     updatedOn: 'Aktualisiert am',
     dateLocale: 'de-CH',
     otherLangs: [
-      { code: 'it', label: 'Italiano', href: '/it' },
-      { code: 'en', label: 'English', href: '/en' },
+      { code: 'it', label: 'Italiano', href: '/it/' },
+      { code: 'en', label: 'English', href: '/en/' },
     ],
   },
   it: {
-    base: '/it',
+    base: '/it/',
     artikelBase: '/it/articoli',
     themenBase: '/it/temi',
     siteName: 'Rischi invisibili',
@@ -130,11 +130,11 @@ export const LOCALES: Record<Lang, Locale> = {
     dateLocale: 'it-CH',
     otherLangs: [
       { code: 'de', label: 'Deutsch', href: '/' },
-      { code: 'en', label: 'English', href: '/en' },
+      { code: 'en', label: 'English', href: '/en/' },
     ],
   },
   en: {
-    base: '/en',
+    base: '/en/',
     artikelBase: '/en/articles',
     themenBase: '/en/topics',
     siteName: 'Invisible Risks',
@@ -180,7 +180,7 @@ export const LOCALES: Record<Lang, Locale> = {
     dateLocale: 'en-US',
     otherLangs: [
       { code: 'de', label: 'Deutsch', href: '/' },
-      { code: 'it', label: 'Italiano', href: '/it' },
+      { code: 'it', label: 'Italiano', href: '/it/' },
     ],
   },
 };

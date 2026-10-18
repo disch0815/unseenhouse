@@ -29,7 +29,7 @@ export const SISTER: Record<
     ],
   },
   it: {
-    url: `${SISTER_URL}/it`,
+    url: `${SISTER_URL}/it/`,
     label: 'Sito gemello',
     title: 'Radiazioni nella vita quotidiana',
     intro:
@@ -43,7 +43,7 @@ export const SISTER: Record<
     ],
   },
   en: {
-    url: `${SISTER_URL}/en`,
+    url: `${SISTER_URL}/en/`,
     label: 'Sister site',
     title: 'Everyday Radiation',
     intro:
