@@ -7,6 +7,10 @@ export const SITE = {
   // AdSense: Nach Freischaltung des AdSense-Kontos hier die Publisher-ID eintragen,
   // z. B. 'ca-pub-1234567890123456'. Solange leer, werden nur Platzhalter gerendert.
   adsensePublisherId: 'ca-pub-1767160731181931',
+  // Google Analytics 4: Mess-ID der Property eintragen (z. B. 'G-XXXXXXXXXX').
+  // Solange leer, wird kein Analytics-Code ausgeliefert. Consent Mode v2 ist
+  // vorkonfiguriert (Standard: abgelehnt, Freigabe über die Google-CMP).
+  ga4MeasurementId: '',
   // Affiliate: Amazon-Partner-Tags pro Marktplatz (partnernet.amazon.de,
   // programma-affiliazione.amazon.it, affiliate-program.amazon.com).
   // Leere Tags => Link ohne Tag. Wird von AffiliateBox automatisch angehängt.
