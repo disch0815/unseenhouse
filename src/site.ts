@@ -10,7 +10,7 @@ export const SITE = {
   // Google Analytics 4: Mess-ID der Property eintragen (z. B. 'G-XXXXXXXXXX').
   // Solange leer, wird kein Analytics-Code ausgeliefert. Consent Mode v2 ist
   // vorkonfiguriert (Standard: abgelehnt, Freigabe über die Google-CMP).
-  ga4MeasurementId: '',
+  ga4MeasurementId: 'G-YMH48SKN6Y',
   // Affiliate: Amazon-Partner-Tags pro Marktplatz (partnernet.amazon.de,
   // programma-affiliazione.amazon.it, affiliate-program.amazon.com).
   // Leere Tags => Link ohne Tag. Wird von AffiliateBox automatisch angehängt.
